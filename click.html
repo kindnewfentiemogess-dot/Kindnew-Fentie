@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic-Tac-Toe Game (X and O)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #2c3e50;
+            color: white;
+            padding-top: 30px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 8px;
+            justify-content: center;
+            margin: 20px auto;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .cell:hover {
+            background-color: #bdc3c7;
+        }
+
+        #status {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tic-Tac-Toe  ❌⭕</h1>
+    <div id="status"> order of </div>
+
+    <div class="board">
+        <div class="cell" onclick="makeMove(this, 0)"></div>
+        <div class="cell" onclick="makeMove(this, 1)"></div>
+        <div class="cell" onclick="makeMove(this, 2)"></div>
+        <div class="cell" onclick="makeMove(this, 3)"></div>
+        <div class="cell" onclick="makeMove(this, 4)"></div>
+        <div class="cell" onclick="makeMove(this, 5)"></div>
+        <div class="cell" onclick="makeMove(this, 6)"></div>
+        <div class="cell" onclick="makeMove(this, 7)"></div>
+        <div class="cell" onclick="makeMove(this, 8)"></div>
+    </div>
+
+    <button onclick="resetGame()">start new game</button>
+
+    <script>
+        let currentPlayer = "X";
+        let boardState = ["", "", "", "", "", "", "", "", ""];
+        let gameActive = true;
+
+        const winningCombinations = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],  
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],  
+            [0, 4, 8], [2, 4, 6]               
+        ];
+
+        function makeMove(cell, index) {
+            if (boardState[index] !== "" || !gameActive) return;
+
+            boardState[index] = currentPlayer;
+            cell.textContent = currentPlayer;
+
+            if (checkWin()) {
+                document.getElementById("status").textContent = `🎉 gamer ${currentPlayer} congra`;
+                gameActive = false;
+                return;
+            }
+
+            if (!boardState.includes("")) {
+                document.getElementById("status").textContent = "🤝  (Draw)!";
+                gameActive = false;
+                return;
+            }
+
+            // ተራ መቀየር
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
+            document.getElementById("status").textContent = `  ${currentPlayer}  `;
+        }
+
+        function checkWin() {
+            return winningCombinations.some(combination => {
+                return combination.every(index => {
+                    return boardState[index] === currentPlayer;
+                });
+            });
+        }
+
+        function resetGame() {
+            currentPlayer = "X";
+            boardState = ["", "", "", "", "", "", "", "", ""];
+            gameActive = true;
+            document.getElementById("status").textContent = "order of X";
+            document.querySelectorAll(".cell").forEach(cell => cell.textContent = "");
+        }
+    </script>
+
+</body>
+</html>
