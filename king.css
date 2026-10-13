@@ -1,0 +1,100 @@
+/* General Reset / አጠቃላይ ቅጥ ማስተካከያ */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blueviolet /* Sky blue / የሰማይ ሰማያዊ ቀለም */
+}
+
+/* Scene Setup / የመድረክ ዝግጅት */
+.scene {
+    width: 100%;
+    max-width: 800px;
+    height: 300px;
+    position: relative;
+    background: linear-gradient(to bottom, black (0, 255, 106), #e6e0ff);
+    overflow: hidden;
+    border-bottom: 5px solid #333333;
+}
+
+/* Road Styling / የመንገድ ዲዛይን */
+.road {
+    width: 100%;
+    height: 100px;
+    background-color: #555;
+    position: absolute;
+    bottom: 0;
+}
+
+/* Road Dashed Line / የመንገድ መሃል መስመር */
+.road .line {
+    width: 100%;
+    height: 6px;
+    border-top: 4px dashed #fff;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.car {
+    position: absolute;
+    bottom: 20px;
+    left: -150px;
+    animation: drive 4s linear infinite;
+}
+.scene:nth-child(1) .car-body {
+    width: 140px;
+    height: 50px;
+    background-color: #ff4757; /* Red / ቀይ */
+    border-radius: 20px 20px 0 0;
+    position: relative;
+}
+.wheel {
+    width: 25px;
+    height: 25px;
+    background-color: #222;
+    border-radius: 50%;
+    border: 3px dashed #fff;
+    position: absolute;
+    bottom: -12px;
+    animation: spin 1s linear infinite; /* Wheel spinning animation / ጎማዎች እንዲሽከረከሩ */
+}
+
+.wheel-left {
+    left: 20px;
+}
+
+.wheel-right {
+    right: 20px;
+}
+
+/* Keyframe for Car Movement / የመኪናውን እንቅስቃሴ የሚቆጣጠር ኮድ */
+@keyframes drive {
+    100% {
+        left: -150px;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Keyframe for Wheel Rotation / የጎማዎችን መሽከርከር የሚቆጣጠር ኮድ */
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    } }
+    #toggleBtn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#toggleBtn:hover {
+    background-color: #555;
+}
